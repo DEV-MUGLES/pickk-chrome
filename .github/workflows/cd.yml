@@ -38,10 +38,10 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd item-option-crawl/
+            cd pickk-chrome/
             git pull origin master
-            npm run build
-            pm2 restart index
+            yarn install
+            pm2 restart app
 
       - name: Notify to slack (RESULT)
         uses: 8398a7/action-slack@v3
