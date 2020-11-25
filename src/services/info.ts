@@ -24,7 +24,7 @@ export default class InfoCrawlService {
           // Navigate to given Url and wait until Angular is ready
           // if it's an angular page.
           await page.goto(data.url, {
-            waitUntil: 'load',
+            waitUntil: 'networkidle0',
           });
           const result = await page.evaluate(data.crawler);
           return result;
