@@ -35,11 +35,10 @@ const Helpers = {
         .newPage()
         .catch((ex) => Helpers.debug('create page error: %s', ex));
       if (page) {
-        Helpers.debug('page is created');
         if (typeof onPageCreated === 'function') {
           try {
             await onPageCreated.call(this, page);
-            Helpers.debug('onPageCreated done');
+            Helpers.debug('page is created');
           } catch (ex) {
             Helpers.debug('onPageCreated error: %s', ex);
           }
@@ -158,6 +157,11 @@ const poolLoader = new Pool({
   poolOptions: {
     min: 10,
     max: 20,
+  },
+  onPageCreated: async (page: Page) => {
+    await page.setUserAgent(
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36'
+    );
   },
 });
 
