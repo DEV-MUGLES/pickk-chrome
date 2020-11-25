@@ -27,6 +27,8 @@ export default class OptionCrawlService {
         },
         { url, crawler }
       );
+      this.logger.silly('Info-crawl for %s\n', url);
+      console.log(result);
 
       return result;
     } catch (e) {
