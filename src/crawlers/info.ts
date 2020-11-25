@@ -123,7 +123,7 @@ export const _ssfshopcom = () => {
     .children[0] as HTMLImageElement).src;
   const priceList = (document.getElementsByClassName(
     'price'
-  )[0] as HTMLDivElement).innerText.split(/ | /);
+  )[0] as HTMLDivElement).innerText.split(/ | |\n/);
   const salePrice = priceList[0];
   const originalPrice = priceList[1] || salePrice;
   const isSoldout =
