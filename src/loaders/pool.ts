@@ -1,32 +1,20 @@
 import { createPool } from 'generic-pool';
 import defaultPuppeteer, { Page } from 'puppeteer';
+import fs from 'fs';
+import path from 'path';
 
 const Helpers = {
   createPool,
   debug: console.log,
   defaultPuppeteer,
   defaultPuppeteerArgs: [
-    '--disable-crash-reporter',
-    '--disable-dev-profile',
-    '--disable-gpu',
-    '--disable-notifications',
-    '--disable-offer-store-unmasked-wallet-cards',
-    '--disable-offer-upload-credit-cards',
-    '--disable-password-generation',
-    '--disable-setuid-sandbox',
-    '--disable-speech-api',
-    '--disable-suggestions-ui',
-    '--disable-web-security',
-    '--enable-async-dns',
-    '--enable-tcp-fast-open',
-    // Hide scrollbars from screenshots.
-    '--hide-scrollbars',
-    '--no-default-browser-check',
-    '--no-experiments',
-    '--no-pings',
     '--no-sandbox',
-    '--no-zygote',
-    '--prerender-from-omnibox=disabled',
+    '--disable-setuid-sandbox',
+    '--disable-infobars',
+    '--window-position=0,0',
+    '--ignore-certifcate-errors',
+    '--ignore-certifcate-errors-spki-list',
+    '--user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3312.0 Safari/537.36"',
   ],
   poolFactory: {
     async create() {
@@ -153,15 +141,23 @@ class Pool {
   }
 }
 
+const preloadFile = fs.readFileSync(
+  path.join(__dirname, '../lib/preload.js'),
+  'utf8'
+);
+
 const poolLoader = new Pool({
   poolOptions: {
     min: 3,
     max: 20,
   },
+  puppeteerOptions: {
+    headless: true,
+    ignoreHTTPSErrors: true,
+    userDataDir: './tmp',
+  },
   onPageCreated: async (page: Page) => {
-    await page.setUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36'
-    );
+    await page.evaluateOnNewDocument(preloadFile);
   },
 });
 
