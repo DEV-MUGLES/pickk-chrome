@@ -15,19 +15,23 @@ export default class OptionCrawlService {
       const host = this.getHost(url);
       const crawler = this.getCrawler(host);
 
+      if (!crawler) {
+        throw new Error('Crawler not found');
+      }
+
       const result = await this.pool.process(
         async (page, data) => {
           // Navigate to given Url and wait until Angular is ready
           // if it's an angular page.
           await page.goto(data.url, {
-            waitUntil: 'networkidle0',
+            waitUntil: 'load',
           });
           const result = await page.evaluate(data.crawler);
           return result;
         },
         { url, crawler }
       );
-      this.logger.silly('Info-crawl for %s\n', url);
+      this.logger.silly('Option-crawl for %s\n', url);
       console.log(result);
 
       return result;

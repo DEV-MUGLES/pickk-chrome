@@ -1,6 +1,9 @@
 import { InfoCrawlResult } from '../types/info';
 
 export const parseAll = (result: InfoCrawlResult): InfoCrawlResult => {
+  if (!(result instanceof Object)) {
+    throw new Error('Get invalid result');
+  }
   return Object.keys(result).reduce((acc, key) => {
     return { ...acc, [key]: parseValue(key, result[key]) };
   }, {} as InfoCrawlResult);

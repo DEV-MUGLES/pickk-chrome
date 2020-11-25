@@ -15,12 +15,16 @@ export default class InfoCrawlService {
       const host = this.getHost(url);
       const crawler = this.getCrawler(host);
 
+      if (!crawler) {
+        throw new Error('Crawler not found');
+      }
+
       const result = await this.pool.process(
         async (page, data) => {
           // Navigate to given Url and wait until Angular is ready
           // if it's an angular page.
           await page.goto(data.url, {
-            waitUntil: 'networkidle0',
+            waitUntil: 'load',
           });
           const result = await page.evaluate(data.crawler);
           return result;
@@ -30,7 +34,8 @@ export default class InfoCrawlService {
       this.logger.silly('Info-crawl for %s\n', url);
       console.log(result);
 
-      return correct(parseAll(result));
+      const temp = correct(parseAll(result));
+      return temp;
     } catch (e) {
       this.logger.error(e);
       throw e;
