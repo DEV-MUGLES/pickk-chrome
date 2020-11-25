@@ -155,7 +155,7 @@ class Pool {
 
 const poolLoader = new Pool({
   poolOptions: {
-    min: 10,
+    min: 3,
     max: 20,
   },
   onPageCreated: async (page: Page) => {
