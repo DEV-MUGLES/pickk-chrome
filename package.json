@@ -1,7 +1,7 @@
 {
-  "name": "bulletproof-nodejs",
+  "name": "pickk-chrome",
   "version": "1.0.0",
-  "description": "Bulletproof node.js",
+  "description": "pickk's puppeteer crawl server",
   "main": "src/app.ts",
   "scripts": {
     "dev": "nodemon",
@@ -73,7 +73,7 @@
     "typescript": "^4.0.3"
   },
   "bugs": {
-    "url": "https://github.com/santiq/bulletproof-nodejs/issues"
+    "url": "https://github.com/DEV-MUGLES/pickk-chrome/issues"
   },
-  "homepage": "https://github.com/santiq/bulletproof-nodejs#readme"
+  "homepage": "https://github.com/DEV-MUGLES/pickk-chrome#readme"
 }
