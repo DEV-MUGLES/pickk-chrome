@@ -317,24 +317,28 @@ export const _hyundaihmallcom = () => {
 };
 
 export const _ssensecom = () => {
-  return document.body.innerHTML;
-  const name = (document.querySelector(
-    'h3.pdtTitle'
-  ) as HTMLHeadingElement)?.textContent
-    ?.replace(/\n/gi, '')
+  const name = document
+    .querySelector('meta[name="twitter:title"]')
+    .getAttribute('content')
+    .split('-')[1]
     .trim();
-  const brandKor = '현대몰';
-  const imageUrl = (document.querySelector(
-    '#prd_ipzoom > div._frm_input > img._img_input._active'
-  ) as HTMLImageElement)?.src;
-  const salePrice =
-    document.querySelector(
-      '#content > div > div.pdr_wrap > div.prdInfo_wrap > div.priceCont > p.finalPrice.number.hasDC > strong'
-    )?.textContent || '0';
-  const originalPrice =
-    document.querySelector(
-      '#content > div > div.pdr_wrap > div.prdInfo_wrap > div.priceCont > p:nth-child(1) > span > strong'
-    )?.textContent || '0';
+  const brandKor = document
+    .querySelector('meta[name="twitter:data2"]')
+    .getAttribute('content');
+  const imageUrl = document
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
+  const salePrice = document
+    .querySelector('meta[name="twitter:data1"]')
+    .getAttribute('content')
+    .split(' ')[0]
+    .slice(1);
+
+  const originalPrice = document
+    .querySelector('meta[name="twitter:data1"]')
+    .getAttribute('content')
+    .split(' ')[0]
+    .slice(1);
 
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
@@ -410,5 +414,26 @@ export const _krmcmworldwidecom = () => {
   ).textContent;
   const salePrice = document.querySelector('.product-price > span.price-sales')
     .textContent;
+  return { name, brandKor, imageUrl, salePrice, originalPrice };
+};
+
+export const _www2hmcom = () => {
+  const name = document
+    .querySelector('meta[property="og:title"]')
+    .getAttribute('content')
+    .split('-')[0]
+    .trim();
+  const brandKor = 'hnm';
+  const imageUrl = document
+    .querySelector('meta[name="og:image"]')
+    .getAttribute('content');
+  const originalPrice = document
+    .querySelector('#product-price > div._2rpyBCXDllH8zsC70tsgt0 span')
+    .textContent.replace(/[^\d]+/g, '');
+
+  const salePrice = document
+    .querySelector('#product-price > div._2rpyBCXDllH8zsC70tsgt0 span')
+    .textContent.replace(/[^\d]+/g, '');
+
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
