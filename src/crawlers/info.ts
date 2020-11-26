@@ -188,6 +188,7 @@ export const _lfmallcokr = () => {
 
 export const _nikecom = () => {
   const name = document.querySelector('h1.title-wrap > span.tit').textContent;
+
   const brandKor = '나이키';
   const imageUrl = document
     .querySelector('meta[property="og:image"]')
@@ -335,5 +336,79 @@ export const _ssensecom = () => {
       '#content > div > div.pdr_wrap > div.prdInfo_wrap > div.priceCont > p:nth-child(1) > span > strong'
     )?.textContent || '0';
 
+  return { name, brandKor, imageUrl, salePrice, originalPrice };
+};
+
+export const _guccicom = () => {
+  const name = document
+    .querySelector('meta[property="og:title"]')
+    .getAttribute('content');
+  const brandKor = '구찌';
+  const imageUrl = document
+    .querySelector('#accordion-product-details > picture > img')
+    .getAttribute('srcset');
+
+  const originalPrice =
+    document.querySelector('#markedDown_full_Price')?.textContent || 0;
+  const salePrice = document.querySelector('#markedDown_full_Price')
+    .textContent;
+  return { name, brandKor, imageUrl, salePrice, originalPrice };
+};
+
+export const _diorcom = () => {
+  const name = document
+    .querySelector('meta[property="og:title"]')
+    .getAttribute('content');
+  const brandKor = '디올';
+  const imageUrl = document
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
+
+  const originalPrice =
+    document.querySelector('span.price-line')?.textContent || 0;
+  const salePrice = document.querySelector('span.price-line').textContent;
+  return { name, brandKor, imageUrl, salePrice, originalPrice };
+};
+
+export const _stoneislandcom = () => {
+  const name = document.querySelector('#item__product-info-title > span > span')
+    .textContent;
+  const brandKor = '스톤아일랜드';
+  const imageUrl = document
+    .querySelector('meta[name="twitter:image"]')
+    .getAttribute('content');
+  const originalPrice = document.querySelector('.price > span.value')
+    .textContent;
+  const salePrice = document.querySelector('.price > span.value').textContent;
+  return { name, brandKor, imageUrl, salePrice, originalPrice };
+};
+
+export const _bottegavenetacom = () => {
+  const name = document
+    .querySelector('meta[property="og:title"]')
+    .getAttribute('content');
+  const brandKor = '보테가베네타';
+  const imageUrl = document
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
+  const originalPrice = document.querySelector('.price > span.value')
+    .textContent;
+  const salePrice = document.querySelector('.price > span.value').textContent;
+  return { name, brandKor, imageUrl, salePrice, originalPrice };
+};
+
+export const _krmcmworldwidecom = () => {
+  const name = document
+    .querySelector('meta[property="og:title"]')
+    .getAttribute('content');
+  const brandKor = 'MCM';
+  const imageUrl = document
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
+  const originalPrice = document.querySelector(
+    '.product-price > span.price-sales'
+  ).textContent;
+  const salePrice = document.querySelector('.product-price > span.price-sales')
+    .textContent;
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
