@@ -1,5 +1,8 @@
 import { createPool } from 'generic-pool';
-import defaultPuppeteer, { Page } from 'puppeteer';
+import defaultPuppeteer from 'puppeteer-extra';
+import { Page } from 'puppeteer';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+
 import fs from 'fs';
 import path from 'path';
 
@@ -93,6 +96,8 @@ class Pool {
     } = this.options;
     puppeteerOptions.args =
       puppeteerOptions.args || Helpers.defaultPuppeteerArgs;
+
+    puppeteer.use(StealthPlugin());
     this.browser = await puppeteer
       .launch(puppeteerOptions)
       .catch((ex) => Helpers.debug('browser create error: %s', ex));
@@ -157,6 +162,71 @@ const poolLoader = new Pool({
     userDataDir: './tmp',
   },
   onPageCreated: async (page: Page) => {
+    await page.setViewport({
+      width: 1920 + Math.floor(Math.random() * 100),
+      height: 3000 + Math.floor(Math.random() * 100),
+      deviceScaleFactor: 1,
+      hasTouch: false,
+      isLandscape: false,
+      isMobile: false,
+    });
+    await page.setJavaScriptEnabled(true);
+    page.setDefaultNavigationTimeout(0);
+
+    //Skip images/styles/fonts loading for performance
+    await page.setRequestInterception(true);
+    page.on('request', (req) => {
+      if (
+        req.resourceType() == 'stylesheet' ||
+        req.resourceType() == 'font' ||
+        req.resourceType() == 'image'
+      ) {
+        req.abort();
+      } else {
+        req.continue();
+      }
+    });
+
+    await page.evaluateOnNewDocument(() => {
+      // Pass webdriver check
+      Object.defineProperty(navigator, 'webdriver', {
+        get: () => false,
+      });
+    });
+
+    await page.evaluateOnNewDocument(() => {
+      // Pass chrome check
+      window['chrome'] = {
+        runtime: {},
+        // etc.
+      };
+    });
+
+    await page.evaluateOnNewDocument(() => {
+      //Pass notifications check
+      const originalQuery = window.navigator.permissions.query;
+      return (window.navigator.permissions.query = (parameters) =>
+        parameters.name === 'notifications'
+          ? Promise.resolve({ state: Notification.permission } as any)
+          : originalQuery(parameters));
+    });
+
+    await page.evaluateOnNewDocument(() => {
+      // Overwrite the `plugins` property to use a custom getter.
+      Object.defineProperty(navigator, 'plugins', {
+        // This just needs to have `length > 0` for the current test,
+        // but we could mock the plugins too if necessary.
+        get: () => [1, 2, 3, 4, 5],
+      });
+    });
+
+    await page.evaluateOnNewDocument(() => {
+      // Overwrite the `languages` property to use a custom getter.
+      Object.defineProperty(navigator, 'languages', {
+        get: () => ['en-US', 'en'],
+      });
+    });
+
     await page.evaluateOnNewDocument(preloadFile);
   },
 });
