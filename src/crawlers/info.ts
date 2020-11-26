@@ -356,9 +356,9 @@ export const _guccicom = () => {
 };
 
 export const _diorcom = () => {
-  const name = document
-    .querySelector('meta[property="og:title"]')
-    .getAttribute('content');
+  const name = document.querySelector(
+    'div.product-titles > h1 > span.multiline-text.product-titles-title'
+  ).textContent;
   const brandKor = '디올';
   const imageUrl = document
     .querySelector('meta[property="og:image"]')
