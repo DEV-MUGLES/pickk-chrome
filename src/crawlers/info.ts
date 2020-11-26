@@ -423,16 +423,17 @@ export const _www2hmcom = () => {
     .getAttribute('content')
     .split('-')[0]
     .trim();
-  const brandKor = 'hnm';
+  const brandKor = 'H&M';
   const imageUrl =
     'https://' +
     document.querySelector('meta[name="og:image"]').getAttribute('content');
-  const originalPrice = document
-    .querySelector('#product-price > div > del')
-    .textContent.replace(/[^\d]+/g, '');
   const salePrice = document
     .querySelector('#product-price > div > span')
     .textContent.replace(/[^\d]+/g, '');
+  const originalPrice =
+    document
+      .querySelector('#product-price > div > del')
+      ?.textContent.replace(/[^\d]+/g, '') || salePrice;
 
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
