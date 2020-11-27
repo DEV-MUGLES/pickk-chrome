@@ -437,3 +437,22 @@ export const _www2hmcom = () => {
 
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
+
+export const _playercokr = () => {
+  const name = document.querySelector('h3.hidden-xs').textContent;
+  const brandKor = document.querySelector(
+    '#detail > div.content > div.brand-intro.hidden-xs.mt-0 > div > p:nth-child(1) > a > span > span'
+  ).textContent;
+  const imageUrl = document
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
+  const salePrice = document
+    .querySelector('dl.price-with-sale > dd > span')
+    .textContent.replace(/[^\d]+/g, '');
+  const originalPrice =
+    document
+      .querySelector('#frmOrder > div > div.price-info > dl > dd > p')
+      ?.textContent.replace(/[^\d]+/g, '') || salePrice;
+
+  return { name, brandKor, imageUrl, salePrice, originalPrice };
+};
