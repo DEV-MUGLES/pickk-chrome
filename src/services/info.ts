@@ -27,7 +27,6 @@ export default class InfoCrawlService {
           const { url, crawler, waitUntil } = data;
           await page.goto(url, {
             waitUntil,
-            timeout: 10000,
           });
           const result = await page.evaluate(crawler);
           return result;
