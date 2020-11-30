@@ -28,6 +28,7 @@ export default class OptionCrawlService {
 
           await page.goto(url, {
             waitUntil,
+            timeout: 10000,
           });
           const result = await page.evaluate(crawler);
           return result;
