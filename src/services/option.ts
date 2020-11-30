@@ -4,6 +4,7 @@ import { parseHostName } from '../lib';
 import { OptionCrawlResult } from '../types';
 
 import * as optionCrawlers from '../crawlers/option';
+import { waitUntilData } from '../crawlers/waitUntil';
 
 @Service()
 export default class OptionCrawlService {
@@ -19,17 +20,19 @@ export default class OptionCrawlService {
         throw new Error('Crawler not found');
       }
 
+      const waitUntil = waitUntilData[host] || 'load';
+
       const result = await this.pool.process(
         async (page, data) => {
-          // Navigate to given Url and wait until Angular is ready
-          // if it's an angular page.
-          await page.goto(data.url, {
-            waitUntil: 'networkidle0',
+          const { url, crawler, waitUntil } = data;
+
+          await page.goto(url, {
+            waitUntil,
           });
-          const result = await page.evaluate(data.crawler);
+          const result = await page.evaluate(crawler);
           return result;
         },
-        { url, crawler }
+        { url, crawler, waitUntil }
       );
       this.logger.silly('Option-crawl for %s\n', url);
       console.log(result);

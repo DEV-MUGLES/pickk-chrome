@@ -4,6 +4,8 @@ import { parseHostName, correct, parseAll } from '../lib';
 import { InfoCrawlResult } from '../types';
 
 import * as infoCrawlers from '../crawlers/info';
+import { heavies } from '../lib/heavies';
+import { waitUntilData } from '../crawlers/waitUntil';
 
 @Service()
 export default class InfoCrawlService {
@@ -19,17 +21,19 @@ export default class InfoCrawlService {
         throw new Error('Crawler not found');
       }
 
+      const waitUntil = waitUntilData[host] || 'load';
+
       const result = await this.pool.process(
         async (page, data) => {
-          // Navigate to given Url and wait until Angular is ready
-          // if it's an angular page.
-          await page.goto(data.url, {
-            waitUntil: 'networkidle0',
+          const { url, crawler, waitUntil } = data;
+          await page.goto(url, {
+            waitUntil,
+            timeout: 5000,
           });
-          const result = await page.evaluate(data.crawler);
+          const result = await page.evaluate(crawler);
           return result;
         },
-        { url, crawler }
+        { url, crawler, waitUntil }
       );
       this.logger.silly('Info-crawl for %s\n', url);
       console.log(result);
