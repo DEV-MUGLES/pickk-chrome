@@ -15,26 +15,20 @@ export const _29cmcokr = () => {
     'div.item_detail_view > div.prd_brand_area h1.kor'
   ).textContent;
 
-  let originalPrice = document.querySelector(
-    'body > ui-root > div > section > ui-item > div > div.detail_cnt_wrap > ui-detail-item > div > div.item_detail_view > ui-detail-order > div.detail_order_area > div.prd_price > div > div > div.o > span'
+  const originalPrice = document.querySelector(
+    'div.detail_order_area > div.prd_price div.sale div:nth-child(2) span.num'
   )?.textContent;
 
-  let salePrice = document.querySelector(
-    'body > ui-root > div > section > ui-item > div > div.detail_cnt_wrap > ui-detail-item > div > div.item_detail_view > ui-detail-order > div.detail_order_area > div.prd_price > div > div > div.s > span'
+  const salePrice = document.querySelector(
+    'div.detail_order_area > div.prd_price div.sale span.num'
   )?.textContent;
-
-  if (!originalPrice && !salePrice) {
-    originalPrice = salePrice = document.querySelector(
-      'body > ui-root > div > section > ui-item > div > div.detail_cnt_wrap > ui-detail-item > div > div.item_detail_view > ui-detail-order > div.detail_order_area > div.prd_price > div > div > div > span'
-    )?.textContent;
-  }
 
   return {
     name: name.replace('\n', '').trim(),
     brandKor,
     imageUrl,
-    salePrice: salePrice.slice(salePrice.indexOf('%') + 1),
-    originalPrice,
+    salePrice: salePrice?.slice(salePrice.indexOf('%') + 1),
+    originalPrice: originalPrice?.slice(originalPrice.indexOf('%') + 1) || 0,
   };
 };
 
