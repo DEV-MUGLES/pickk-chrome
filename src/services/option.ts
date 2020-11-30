@@ -20,7 +20,7 @@ export default class OptionCrawlService {
         throw new Error('Crawler not found');
       }
 
-      const waitUntil = waitUntilData[host] || 'load';
+      const waitUntil = waitUntilData[host] || 'domcontentloaded';
 
       const result = await this.pool.process(
         async (page, data) => {
