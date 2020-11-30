@@ -4,7 +4,6 @@ import { parseHostName, correct, parseAll } from '../lib';
 import { InfoCrawlResult } from '../types';
 
 import * as infoCrawlers from '../crawlers/info';
-import { heavies } from '../lib/heavies';
 import { waitUntilData } from '../crawlers/waitUntil';
 
 @Service()
