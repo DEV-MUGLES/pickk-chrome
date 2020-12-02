@@ -204,22 +204,21 @@ export const _onthelookcokr = () => {
 };
 
 export const _lookpincokr = () => {
-  const name = document.querySelector('span.ProductDetailDesktop_title__3AQr4')
-    .textContent;
-  const brandKor = (document.getElementsByClassName(
-    'StoreRowWithBookmark_name__rw46l'
-  )[0] as HTMLSpanElement).innerText;
+  const name = document.querySelector('title').textContent;
+  const brandKor =
+    (document.getElementsByClassName(
+      'StoreRowWithBookmark_name__rw46l'
+    )[0] as HTMLSpanElement)?.innerText || '룩핀';
   const imageUrl = document
-    .querySelector('.ProductDetailDesktop_imageTab__IBM1k picture')
-    .innerHTML.split(' ')[1]
-    .substring(5)
-    .split('"')[0];
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
   const salePrice = document
-    .querySelector('span.ProductDetailDesktop_price__7vSoT')
-    .textContent.replace(/[^\d]+/g, '');
-  const originalPrice = document.querySelector(
-    '.ProductDetailDesktop_prevPrice__3Eb37'
-  ).textContent;
+    .querySelector('meta[property="og:description"]')
+    .getAttribute('content')
+    .replace(/[^\d]+/g, '');
+  const originalPrice =
+    document.querySelector('.ProductDetailDesktop_prevPrice__3Eb37')
+      ?.textContent || salePrice;
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
 
@@ -236,22 +235,21 @@ export const _g9cokr = () => {
 };
 
 export const _kolonmallcom = () => {
-  const name = (document.querySelector(
-    'div.info-group > form > div.title'
-  ) as HTMLDivElement).textContent;
+  const name = (document.querySelector('div.title') as HTMLDivElement)
+    .textContent;
   const title = (document.querySelector('title') as HTMLTitleElement)
     .textContent;
   const brandKor = title.slice(title.indexOf('_') + 1).trim();
-  const imageUrl = (document.querySelector(
-    '#kolon-content > article > div.head-info-wrap > div.thumb-group > div.thumb.swiper-container.swiper-container-initialized.swiper-container-horizontal > div.swiper-wrapper > div > div > img.base'
-  ) as HTMLImageElement).src;
+  const imageUrl = document
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
   const salePrice =
     document
-      .querySelector('div.info-group > form > div.price > strong')
+      .querySelector('div.price strong')
       ?.textContent.replace(/[^\d]+/g, '') || '0';
   const originalPrice =
     document
-      .querySelector('div.info-group > form > div.price > del')
+      .querySelector('div.price del')
       ?.textContent.replace(/[^\d]+/g, '') ||
     '0' ||
     '0';
@@ -263,17 +261,13 @@ export const _hiphopercom = () => {
     .textContent;
   const brandKor = (document.querySelector('#getBrandName') as HTMLDivElement)
     .textContent;
-  const imageUrl = (document.querySelector(
-    'body > div:nth-child(2) > main > section.viewdetail.clear > div.imgs.on_w > div.visual > a > img'
-  ) as HTMLImageElement).src;
+  const imageUrl = document
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
   const salePrice =
-    document.querySelector(
-      'body > div:nth-child(2) > main > section.viewdetail.clear > div.info > dl:nth-child(3) > dd.price_txt > strong'
-    )?.textContent || '0';
+    document.querySelector('dd.price_txt > strong')?.textContent || '0';
   const originalPrice =
-    document.querySelector(
-      'body > div:nth-child(2) > main > section.viewdetail.clear > div.info > dl:nth-child(3) > dd.dis_f.ai_c > del'
-    )?.textContent || '0';
+    document.querySelector('dd.dis_f.ai_c > del')?.textContent || '0';
 
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
@@ -285,17 +279,14 @@ export const _hyundaihmallcom = () => {
     ?.replace(/\n/gi, '')
     .trim();
   const brandKor = '현대몰';
-  const imageUrl = (document.querySelector(
-    '#prd_ipzoom > div._frm_input > img._img_input._active'
-  ) as HTMLImageElement)?.src;
+  const imageUrl = document
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
   const salePrice =
-    document.querySelector(
-      '#content > div > div.pdr_wrap > div.prdInfo_wrap > div.priceCont > p.finalPrice.number.hasDC > strong'
-    )?.textContent || '0';
+    document.querySelector('p.finalPrice.number.hasDC > strong')?.textContent ||
+    '0';
   const originalPrice =
-    document.querySelector(
-      '#content > div > div.pdr_wrap > div.prdInfo_wrap > div.priceCont > p:nth-child(1) > span > strong'
-    )?.textContent || '0';
+    document.querySelector('div.priceCont strong')?.textContent || '0';
 
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
@@ -425,17 +416,17 @@ export const _www2hmcom = () => {
 export const _playercokr = () => {
   const name = document.querySelector('h3.hidden-xs').textContent;
   const brandKor = document.querySelector(
-    '#detail > div.content > div.brand-intro.hidden-xs.mt-0 > div > p:nth-child(1) > a > span > span'
+    'div.brand-intro.hidden-xs.mt-0 span span'
   ).textContent;
   const imageUrl = document
     .querySelector('meta[property="og:image"]')
     .getAttribute('content');
   const salePrice = document
-    .querySelector('dl.price-with-sale > dd > span')
+    .querySelector('dl.price-with-sale span')
     .textContent.replace(/[^\d]+/g, '');
   const originalPrice =
     document
-      .querySelector('#frmOrder > div > div.price-info > dl > dd > p')
+      .querySelector('div.price-info dd > p')
       ?.textContent.replace(/[^\d]+/g, '') || salePrice;
 
   return { name, brandKor, imageUrl, salePrice, originalPrice };
