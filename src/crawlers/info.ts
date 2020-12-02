@@ -414,10 +414,10 @@ export const _www2hmcom = () => {
 };
 
 export const _playercokr = () => {
-  const name = document.querySelector('h3.hidden-xs').textContent;
-  const brandKor = document.querySelector(
-    'div.brand-intro.hidden-xs.mt-0 span span'
-  ).textContent;
+  const name = document.querySelector('#detail div.heading-title h3')
+    .textContent;
+  const brandKor = document.querySelector('div.brand-intro span span')
+    .textContent;
   const imageUrl = document
     .querySelector('meta[property="og:image"]')
     .getAttribute('content');
