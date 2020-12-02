@@ -1,3 +1,6 @@
+import { attempt } from "lodash";
+import { doc } from "prettier";
+
 export const _29cmcokr = () => {
   const name = document.querySelector(
     'div.item_detail_view > ui-detail-order > div.detail_order_area > div.prd_info > div.info > div'
@@ -36,24 +39,10 @@ export const _hivercokr = () => {
   const name = (document.getElementsByClassName(
     'detail_title'
   )[0] as HTMLDivElement).textContent;
-  const brandKor = (document.getElementsByClassName('list_store_title')[0]
-    .children[0] as HTMLAnchorElement).text;
-  const imageUrl = (document.getElementById('imageGallery').children[
-    document.getElementById('imageGallery').children.length > 1 ? 1 : 0
-  ].children[0] as HTMLImageElement).src;
-  let salePrice = (document.getElementsByClassName(
-    'detail_price'
-  )[0] as HTMLDivElement).textContent;
-  let originalPrice = salePrice;
-  if (salePrice.indexOf('%') > -1) {
-    const { innerHTML } = document.getElementsByClassName('detail_price')[0];
-    salePrice = innerHTML.slice(
-      innerHTML.indexOf('</b>'),
-      innerHTML.indexOf('<span')
-    );
-    originalPrice = document.getElementsByClassName('detail_price')[0]
-      .children[1].innerHTML;
-  }
+  const brandKor = document.querySelector('strong.store-name').textContent;
+  const imageUrl = document.querySelector('div.swiper-wrapper').innerHTML.split('&quot;')[1];
+  const salePrice = document.querySelector('strong.current-price').textContent.split('원')[0].replace(/[^\d]+/g, '');
+  const originalPrice = document.querySelector('.detail_price del').textContent;
 
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
@@ -149,20 +138,17 @@ export const _matchesfashioncom = () => {
   )[0] as HTMLSpanElement).innerText.trim();
   const brandKor = (document.getElementById('breadcrumb').children[0]
     .children[2].children[0] as HTMLAnchorElement).text.trim();
-  const imageUrl = (document.getElementById('slick-slide00').children[0]
-    .children[0].children[0] as HTMLImageElement).src;
-  const priceList = (document.getElementsByClassName(
-    'pdp-price'
-  )[0] as HTMLParagraphElement).innerText.split(/₩|\//);
-  const originalPrice = priceList[1].trim();
-  const salePrice =
-    priceList.length === 3 ? originalPrice : priceList[2].trim();
+    const imageUrl = document
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
+  const originalPrice = document.querySelector('.sticky__product-name .pdp-price').textContent;
+  const salePrice = document.querySelector('');
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
 
 export const _lfmallcokr = () => {
   const name = document
-    .querySelector('meta[property="og:title"]')
+    .querySelector('meta[property="og:description"]')
     .getAttribute('content');
   const brandKor = document
     .querySelector('meta[name="keywords"]')
@@ -182,7 +168,6 @@ export const _lfmallcokr = () => {
 
 export const _nikecom = () => {
   const name = document.querySelector('h1.title-wrap > span.tit').textContent;
-
   const brandKor = '나이키';
   const imageUrl = document
     .querySelector('meta[property="og:image"]')
@@ -198,6 +183,7 @@ export const _onthelookcokr = () => {
   const name = (document.getElementsByClassName(
     'sc-jdfcpN'
   )[0] as HTMLDivElement).innerText;
+  
   const brandKor = (document.getElementsByClassName(
     'sc-bIqbHp'
   )[0] as HTMLDivElement).innerText;
@@ -212,26 +198,13 @@ export const _onthelookcokr = () => {
 };
 
 export const _lookpincokr = () => {
-  const name = (document.getElementsByClassName(
-    'ProductDetailMobile_title__373rx'
-  )[0] as HTMLSpanElement).innerText;
+  const name = document.querySelector('span.ProductDetailDesktop_title__3AQr4').textContent.split('[')[0];
   const brandKor = (document.getElementsByClassName(
     'StoreRowWithBookmark_name__rw46l'
   )[0] as HTMLSpanElement).innerText;
-  const imageUrl = (document.getElementsByClassName(
-    'ProductDetailMobile_image__gmU9K'
-  )[0] as HTMLImageElement).src;
-  const salePrice = (document.getElementsByClassName(
-    'ProductDetailMobile_price__3RGzV'
-  )[0] as HTMLSpanElement).innerText;
-  const originalPrice =
-    document.getElementsByClassName(
-      'ProductDetailMobile_prevPrice__3huws'
-    )[0] === undefined
-      ? salePrice
-      : (document.getElementsByClassName(
-          'ProductDetailMobile_prevPrice__3huws'
-        )[0] as HTMLSpanElement).innerText;
+  const imageUrl = document.querySelector('.ProductDetailDesktop_imageBtn__2qRlI picture').innerHTML.split('class')[0].split('=')[1];
+  const salePrice = document.querySelector('span.ProductDetailDesktop_price__7vSoT').textContent.replace(/[^\d]+/g, '');
+  const originalPrice = salePrice;
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
 
@@ -251,7 +224,6 @@ export const _kolonmallcom = () => {
   const name = (document.querySelector(
     'div.info-group > form > div.title'
   ) as HTMLDivElement).textContent;
-
   const title = (document.querySelector('title') as HTMLTitleElement)
     .textContent;
   const brandKor = title.slice(title.indexOf('_') + 1).trim();
@@ -260,11 +232,10 @@ export const _kolonmallcom = () => {
   ) as HTMLImageElement).src;
   const salePrice =
     document.querySelector('div.info-group > form > div.price > strong')
-      ?.textContent || '0';
+      ?.textContent.replace(/[^\d]+/g, '') || '0';
   const originalPrice =
     document.querySelector('div.info-group > form > div.price > del')
-      ?.textContent || '0';
-
+      ?.textContent.replace(/[^\d]+/g, '') || '0' || '0';
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
 
