@@ -1,4 +1,3 @@
-
 export const _29cmcokr = () => {
   const name = document.querySelector(
     'div.item_detail_view > ui-detail-order > div.detail_order_area > div.prd_info > div.info > div'
@@ -38,8 +37,13 @@ export const _hivercokr = () => {
     'detail_title'
   )[0] as HTMLDivElement).textContent;
   const brandKor = document.querySelector('strong.store-name').textContent;
-  const imageUrl = document.querySelector('div.swiper-wrapper').innerHTML.split('&quot;')[1];
-  const salePrice = document.querySelector('strong.current-price').textContent.split('원')[0].replace(/[^\d]+/g, '');
+  const imageUrl = document
+    .querySelector('div.swiper-wrapper')
+    .innerHTML.split('&quot;')[1];
+  const salePrice = document
+    .querySelector('strong.current-price')
+    .textContent.split('원')[0]
+    .replace(/[^\d]+/g, '');
   const originalPrice = document.querySelector('.detail_price del').textContent;
 
   return { name, brandKor, imageUrl, salePrice, originalPrice };
@@ -136,11 +140,15 @@ export const _matchesfashioncom = () => {
   )[0] as HTMLSpanElement).innerText.trim();
   const brandKor = (document.getElementById('breadcrumb').children[0]
     .children[2].children[0] as HTMLAnchorElement).text.trim();
-    const imageUrl = document
+  const imageUrl = document
     .querySelector('meta[property="og:image"]')
     .getAttribute('content');
-  const originalPrice = document.querySelector('.sticky__product-name .pdp-price').textContent;
-  const salePrice = document.querySelector('');
+  const originalPrice = document
+    .querySelector('.pdp-price strike')
+    .textContent.replace(/[^\d]+/g, '');
+  const salePrice = document
+    .querySelector('.pdp-price__hilite')
+    .textContent.split('$')[1];
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
 
@@ -181,7 +189,7 @@ export const _onthelookcokr = () => {
   const name = (document.getElementsByClassName(
     'sc-jdfcpN'
   )[0] as HTMLDivElement).innerText;
-  
+
   const brandKor = (document.getElementsByClassName(
     'sc-bIqbHp'
   )[0] as HTMLDivElement).innerText;
@@ -196,13 +204,22 @@ export const _onthelookcokr = () => {
 };
 
 export const _lookpincokr = () => {
-  const name = document.querySelector('span.ProductDetailDesktop_title__3AQr4').textContent.split('[')[0];
+  const name = document.querySelector('span.ProductDetailDesktop_title__3AQr4')
+    .textContent;
   const brandKor = (document.getElementsByClassName(
     'StoreRowWithBookmark_name__rw46l'
   )[0] as HTMLSpanElement).innerText;
-  const imageUrl = document.querySelector('.ProductDetailDesktop_imageBtn__2qRlI picture').innerHTML.split('class')[0].split('=')[1];
-  const salePrice = document.querySelector('span.ProductDetailDesktop_price__7vSoT').textContent.replace(/[^\d]+/g, '');
-  const originalPrice = salePrice;
+  const imageUrl = document
+    .querySelector('.ProductDetailDesktop_imageTab__IBM1k picture')
+    .innerHTML.split(' ')[1]
+    .substring(5)
+    .split('"')[0];
+  const salePrice = document
+    .querySelector('span.ProductDetailDesktop_price__7vSoT')
+    .textContent.replace(/[^\d]+/g, '');
+  const originalPrice = document.querySelector(
+    '.ProductDetailDesktop_prevPrice__3Eb37'
+  ).textContent;
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
 
@@ -229,11 +246,15 @@ export const _kolonmallcom = () => {
     '#kolon-content > article > div.head-info-wrap > div.thumb-group > div.thumb.swiper-container.swiper-container-initialized.swiper-container-horizontal > div.swiper-wrapper > div > div > img.base'
   ) as HTMLImageElement).src;
   const salePrice =
-    document.querySelector('div.info-group > form > div.price > strong')
+    document
+      .querySelector('div.info-group > form > div.price > strong')
       ?.textContent.replace(/[^\d]+/g, '') || '0';
   const originalPrice =
-    document.querySelector('div.info-group > form > div.price > del')
-      ?.textContent.replace(/[^\d]+/g, '') || '0' || '0';
+    document
+      .querySelector('div.info-group > form > div.price > del')
+      ?.textContent.replace(/[^\d]+/g, '') ||
+    '0' ||
+    '0';
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
 

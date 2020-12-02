@@ -3,5 +3,5 @@ export const waitUntilData = {
   'hiver.co.kr': 'networkidle0',
   'lookpin.co.kr': 'load',
   'hiphoper.com': 'load',
-  'www2.hm.com':'networkidle0',
+  'www2.hm.com': 'networkidle0',
 };
