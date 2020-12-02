@@ -1,5 +1,3 @@
-import { attempt } from "lodash";
-import { doc } from "prettier";
 
 export const _29cmcokr = () => {
   const name = document.querySelector(
