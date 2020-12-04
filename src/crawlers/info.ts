@@ -262,8 +262,8 @@ export const _hiphopercom = () => {
   const brandKor = (document.querySelector('#getBrandName') as HTMLDivElement)
     .textContent;
   const imageUrl = document
-    .querySelector('meta[property="og:image"]')
-    .getAttribute('content');
+    .querySelector('.thumbnails a > img')
+    .getAttribute('src');
   const salePrice =
     document.querySelector('dd.price_txt > strong')?.textContent || '0';
   const originalPrice =
