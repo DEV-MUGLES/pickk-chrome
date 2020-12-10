@@ -17,7 +17,7 @@ const Helpers = {
     '--window-position=0,0',
     '--ignore-certifcate-errors',
     '--ignore-certifcate-errors-spki-list',
-    '--user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3312.0 Safari/537.36"',
+    '--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36',
   ],
   poolFactory: {
     async create() {
