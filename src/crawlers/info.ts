@@ -344,16 +344,17 @@ export const _ssensecom = () => {
     .querySelector('meta[name="twitter:data1"]')
     .getAttribute('content')
     .replace(/[^\d]+/g, '');
-  const originalPrice = document
-    .querySelector('h2.pdp-product-title__price--sale-amount-tag')
-    ?.textContent.replace(/[^\d]+/g, '');
+  const originalPrice =
+    document
+      .querySelector('h2.pdp-product-title__price--sale-amount-tag')
+      ?.textContent.replace(/[^\d]+/g, '') || salePrice;
 
   return {
     name,
     brandKor,
     imageUrl,
     salePrice,
-    originalPrice: originalPrice ? originalPrice : salePrice,
+    originalPrice,
   };
 };
 
