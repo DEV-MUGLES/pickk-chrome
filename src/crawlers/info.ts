@@ -336,19 +336,17 @@ export const _ssensecom = () => {
   const brandEng = document
     .querySelector('meta[name="twitter:data2"]')
     .getAttribute('content');
-  const brandKor = brands[brandEng];
+  const brandKor = brands[brandEng] || brandEng;
   const imageUrl = document
     .querySelector('img.product-detail')
     .getAttribute('data-srcset');
   const salePrice = document
     .querySelector('meta[name="twitter:data1"]')
     .getAttribute('content')
-    .split(' ')[0]
-    .slice(1);
+    .replace(/[^\d]+/g, '');
   const originalPrice = document
     .querySelector('h2.pdp-product-title__price--sale-amount-tag')
-    ?.textContent.trim()
-    .split(' ')[0];
+    ?.textContent.replace(/[^\d]+/g, '');
 
   return {
     name,
