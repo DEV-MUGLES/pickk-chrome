@@ -291,13 +291,65 @@ export const _hyundaihmallcom = () => {
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
 
-export const _ssensecom = () =>{
-  const name = document.querySelector('h2.pdp-product-title__name').textContent.trim();
-  const brandKor = '센스';
-  const imageUrl = document.querySelector('img.product-detail').getAttribute('data-srcset');
-  const salePrice = document.querySelector('h3.pdp-product-title__price').textContent.trim().split(' ')[0];
-  const saleTag = document.querySelector('h2.pdp-product-title__price--sale-amount-tag');
-  const originalPrice = !saleTag? salePrice:saleTag.textContent.trim().split(' ')[0];
+export const _ssensecom = () => {
+  const brands = {
+    'A.P.C.': '아페쎄',
+    'Alexander McQueen': '알렉산더 맥퀸',
+    'Acne Studios': '아크네 스튜디오',
+    'ADER error': '아더에러',
+    'adidas Originals': '아디다스 오리지널스',
+    Balenciaga: '발렌시아가',
+    Balmain: '발망',
+    Burberry: '버버리',
+    'Calvin Klein Underwear': '캘빈클라인 언더웨어',
+    'Carhartt Work In Progress': '칼하트WIP',
+    'Coach 1941': '코치',
+    Converse: '컨버스',
+    'Dolce & Gabbana': '돌체앤가바나',
+    'Dr. Martens': '닥터마틴',
+    Fendi: '펜디',
+    Givenchy: '지방시',
+    Gucci: '구찌',
+    Kenzo: '겐조',
+    Ksubi: '수비',
+    Lacoste: '라코스테',
+    "Levi's": '리바이스',
+    'Maison Kitsuné': '메종 키츠네',
+    'Maison Margiela': '메종 마르지엘라',
+    MCQ: '멕큐',
+    'New Balance': '뉴발란스',
+    Nike: '나이키',
+    'Paul Smith': '폴스미스',
+    'Raf Simons': '라프 시몬스',
+    'Reebok Classics': '리복 클래식',
+    'Saint Laurent': '입생로랑',
+    Valentino: '발렌티노',
+    Vans: '반스',
+    Versace: '베르사체',
+  };
+
+  const name = document
+    .querySelector('meta[name="twitter:title"]')
+    .getAttribute('content')
+    .split('-')[1]
+    .trim();
+  const brandEng = document
+    .querySelector('meta[name="twitter:data2"]')
+    .getAttribute('content');
+  const brandKor = brands[brandEng];
+  const imageUrl = document
+    .querySelector('img.product-detail')
+    .getAttribute('data-srcset');
+  const salePrice = document
+    .querySelector('h3.pdp-product-title__price')
+    .textContent.trim()
+    .split(' ')[0];
+  const saleTag = document.querySelector(
+    'h2.pdp-product-title__price--sale-amount-tag'
+  );
+  const originalPrice = !saleTag
+    ? salePrice
+    : saleTag.textContent.trim().split(' ')[0];
 
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
