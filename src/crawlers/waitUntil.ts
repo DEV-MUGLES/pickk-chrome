@@ -4,4 +4,5 @@ export const waitUntilData = {
   'lookpin.co.kr': 'load',
   'hiphoper.com': 'load',
   'www2.hm.com': 'networkidle0',
+  'ssense.com': 'load',
 };
