@@ -291,29 +291,13 @@ export const _hyundaihmallcom = () => {
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
 
-export const _ssensecom = () => {
-  const name = document
-    .querySelector('meta[name="twitter:title"]')
-    .getAttribute('content')
-    .split('-')[1]
-    .trim();
-  const brandKor = document
-    .querySelector('meta[name="twitter:data2"]')
-    .getAttribute('content');
-  const imageUrl = document
-    .querySelector('meta[property="og:image"]')
-    .getAttribute('content');
-  const salePrice = document
-    .querySelector('meta[name="twitter:data1"]')
-    .getAttribute('content')
-    .split(' ')[0]
-    .slice(1);
-
-  const originalPrice = document
-    .querySelector('meta[name="twitter:data1"]')
-    .getAttribute('content')
-    .split(' ')[0]
-    .slice(1);
+export const _ssensecom = () =>{
+  const name = document.querySelector('h2.pdp-product-title__name').textContent.trim();
+  const brandKor = '센스';
+  const imageUrl = document.querySelector('img.product-detail').getAttribute('data-srcset');
+  const salePrice = document.querySelector('h3.pdp-product-title__price').textContent.trim().split(' ')[0];
+  const saleTag = document.querySelector('h2.pdp-product-title__price--sale-amount-tag');
+  const originalPrice = !saleTag? salePrice:saleTag.textContent.trim().split(' ')[0];
 
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
