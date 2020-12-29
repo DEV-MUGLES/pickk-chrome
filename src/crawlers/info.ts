@@ -341,17 +341,22 @@ export const _ssensecom = () => {
     .querySelector('img.product-detail')
     .getAttribute('data-srcset');
   const salePrice = document
-    .querySelector('h3.pdp-product-title__price')
-    .textContent.trim()
+    .querySelector('meta[name="twitter:data1"]')
+    .getAttribute('content')
+    .split(' ')[0]
+    .slice(1);
+  const originalPrice = document
+    .querySelector('h2.pdp-product-title__price--sale-amount-tag')
+    ?.textContent.trim()
     .split(' ')[0];
-  const saleTag = document.querySelector(
-    'h2.pdp-product-title__price--sale-amount-tag'
-  );
-  const originalPrice = !saleTag
-    ? salePrice
-    : saleTag.textContent.trim().split(' ')[0];
 
-  return { name, brandKor, imageUrl, salePrice, originalPrice };
+  return {
+    name,
+    brandKor,
+    imageUrl,
+    salePrice,
+    originalPrice: originalPrice ? originalPrice : salePrice,
+  };
 };
 
 export const _guccicom = () => {
