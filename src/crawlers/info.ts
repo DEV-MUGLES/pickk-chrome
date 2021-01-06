@@ -471,3 +471,17 @@ export const _playercokr = () => {
 
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
+
+export const _coupangcom = () => {
+  const name = document
+    .querySelector('meta[property="og:title"]')
+    .getAttribute('content');
+  const imageUrl = document
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
+  const originalPrice = document.querySelector('span.origin-price').textContent;
+  const salePrice = document.querySelector('span.total-price > strong')
+    .textContent;
+
+  return { name, imageUrl, salePrice, originalPrice };
+};
