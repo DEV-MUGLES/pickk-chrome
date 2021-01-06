@@ -5,4 +5,5 @@ export const waitUntilData = {
   'hiphoper.com': 'load',
   'www2.hm.com': 'networkidle0',
   'ssense.com': 'load',
+  'thesortie.com': 'networkidle0',
 };
