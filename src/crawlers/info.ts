@@ -471,3 +471,27 @@ export const _playercokr = () => {
 
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
+
+export const _coupangcom = () => {
+  const name = document
+    .querySelector('meta[property="og:title"]')
+    .getAttribute('content');
+  const brandKor = document
+    .querySelector('a.prod-brand-name')
+    .getAttribute('data-brand-name');
+
+  const imageUrl = document
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
+  const originalPrice = document.querySelector('span.origin-price').textContent;
+  const salePrice = document.querySelector('span.total-price > strong')
+    .textContent;
+
+  return {
+    name,
+    brandKor: brandKor || '쿠팡',
+    imageUrl,
+    salePrice,
+    originalPrice,
+  };
+};
