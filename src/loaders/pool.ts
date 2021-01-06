@@ -162,6 +162,8 @@ const poolLoader = new Pool({
     userDataDir: './tmp',
   },
   onPageCreated: async (page: Page) => {
+    page.setDefaultNavigationTimeout(0);
+
     await page.setViewport({
       width: 1920 + Math.floor(Math.random() * 100),
       height: 3000 + Math.floor(Math.random() * 100),
