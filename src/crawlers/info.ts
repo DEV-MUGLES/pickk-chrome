@@ -476,10 +476,9 @@ export const _coupangcom = () => {
   const name = document
     .querySelector('meta[property="og:title"]')
     .getAttribute('content');
-  const _brandKor = document
+  const brandKor = document
     .querySelector('a.prod-brand-name')
     .getAttribute('data-brand-name');
-  const brandKor = _brandKor.length > 0 ? _brandKor : '쿠팡';
 
   const imageUrl = document
     .querySelector('meta[property="og:image"]')
@@ -488,5 +487,11 @@ export const _coupangcom = () => {
   const salePrice = document.querySelector('span.total-price > strong')
     .textContent;
 
-  return { name, brandKor, imageUrl, salePrice, originalPrice };
+  return {
+    name,
+    brandKor: brandKor || '쿠팡',
+    imageUrl,
+    salePrice,
+    originalPrice,
+  };
 };
