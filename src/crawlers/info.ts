@@ -235,11 +235,22 @@ export const _g9cokr = () => {
 };
 
 export const _kolonmallcom = () => {
+  const brands = {
+    CUSTOMELLOW: '커스텀멜로우',
+    SERIES: '시리즈',
+    COURONNE: '쿠론',
+    'KOLON SPORT': '코오롱스포츠',
+    HEAD: '헤드',
+    'SUECOMMA BONNIE': '슈콤마보니',
+  };
+
   const name = (document.querySelector('div.title') as HTMLDivElement)
     .textContent;
   const title = (document.querySelector('title') as HTMLTitleElement)
     .textContent;
-  const brandKor = title.slice(title.indexOf('_') + 1).trim();
+  const brandEng = title.slice(title.indexOf('_') + 1).trim();
+  const brandKor = brands[brandEng] || brandEng;
+
   const imageUrl = document
     .querySelector('meta[property="og:image"]')
     .getAttribute('content');
@@ -253,7 +264,13 @@ export const _kolonmallcom = () => {
       ?.textContent.replace(/[^\d]+/g, '') ||
     '0' ||
     '0';
-  return { name, brandKor, imageUrl, salePrice, originalPrice };
+  return {
+    name,
+    brandKor,
+    imageUrl,
+    salePrice,
+    originalPrice,
+  };
 };
 
 export const _hiphopercom = () => {
