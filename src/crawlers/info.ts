@@ -476,9 +476,11 @@ export const _coupangcom = () => {
   const name = document
     .querySelector('meta[property="og:title"]')
     .getAttribute('content');
-  const brandKor = document
+  const _brandKor = document
     .querySelector('a.prod-brand-name')
     .getAttribute('data-brand-name');
+  const brandKor = _brandKor.length > 0 ? _brandKor : '쿠팡';
+
   const imageUrl = document
     .querySelector('meta[property="og:image"]')
     .getAttribute('content');
