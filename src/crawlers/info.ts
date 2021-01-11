@@ -512,3 +512,29 @@ export const _coupangcom = () => {
     originalPrice,
   };
 };
+
+export const _onthespotcokr = () => {
+  const title = document
+    .querySelector('meta[property="og:title"]')
+    .getAttribute('content')
+    .split('[')[1]
+    .split(']');
+
+  const imageUrl = document
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
+
+  const salePrice = document.querySelector('span.price-cost').textContent;
+
+  const originalPrice = document.querySelector(
+    'span[data-product="normal-price-amount"]'
+  ).textContent;
+
+  return {
+    name: title[1],
+    brandKor: title[0],
+    imageUrl,
+    salePrice,
+    originalPrice,
+  };
+};

@@ -6,4 +6,5 @@ export const waitUntilData = {
   'www2.hm.com': 'networkidle0',
   'ssense.com': 'load',
   'thesortie.com': 'networkidle0',
+  'onthespot.co.kr': 'networkidle2',
 };
