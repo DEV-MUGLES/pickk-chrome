@@ -512,3 +512,26 @@ export const _coupangcom = () => {
     originalPrice,
   };
 };
+
+export const _onthespotcokr = () => {
+  const name = document.querySelector('div.prod-name').textContent;
+  const brandKor = document.querySelector('a.btn-brand').textContent;
+
+  const imageUrl = document
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
+
+  const salePrice = document.querySelector('span.price-cost').textContent;
+
+  const originalPrice = document.querySelector(
+    'span[data-product="normal-price-amount"]'
+  ).textContent;
+
+  return {
+    name,
+    brandKor,
+    imageUrl,
+    salePrice,
+    originalPrice,
+  };
+};
