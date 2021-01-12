@@ -514,11 +514,8 @@ export const _coupangcom = () => {
 };
 
 export const _onthespotcokr = () => {
-  const title = document
-    .querySelector('meta[property="og:title"]')
-    .getAttribute('content')
-    .split('[')[1]
-    .split(']');
+  const name = document.querySelector('div.prod-name').textContent;
+  const brandKor = document.querySelector('a.btn-brand').textContent;
 
   const imageUrl = document
     .querySelector('meta[property="og:image"]')
@@ -531,8 +528,8 @@ export const _onthespotcokr = () => {
   ).textContent;
 
   return {
-    name: title[1],
-    brandKor: title[0],
+    name,
+    brandKor,
     imageUrl,
     salePrice,
     originalPrice,
