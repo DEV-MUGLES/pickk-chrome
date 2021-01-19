@@ -154,7 +154,7 @@ const preloadFile = fs.readFileSync(
 const poolLoader = new Pool({
   poolOptions: {
     min: 3,
-    max: 20,
+    max: 10,
   },
   puppeteerOptions: {
     headless: true,
