@@ -162,7 +162,7 @@ const poolLoader = new Pool({
     userDataDir: './tmp',
   },
   onPageCreated: async (page: Page) => {
-    page.setDefaultNavigationTimeout(0);
+    page.setDefaultNavigationTimeout(20000);
 
     await page.setViewport({
       width: 1920 + Math.floor(Math.random() * 100),
@@ -173,7 +173,6 @@ const poolLoader = new Pool({
       isMobile: false,
     });
     await page.setJavaScriptEnabled(true);
-    page.setDefaultNavigationTimeout(10000);
 
     //Skip images/styles/fonts loading for performance
     await page.setRequestInterception(true);
