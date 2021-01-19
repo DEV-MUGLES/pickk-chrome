@@ -42,6 +42,7 @@ jobs:
             git pull origin master
             sudo npm install -g yarn
             yarn install
+            yarn build
             pm2 restart app
 
       - name: Notify to slack (RESULT)
