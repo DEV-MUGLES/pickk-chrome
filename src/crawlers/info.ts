@@ -535,3 +535,29 @@ export const _onthespotcokr = () => {
     originalPrice,
   };
 };
+
+export const _musinsaapppagelink = () => {
+  const name = document
+    .querySelector('meta[property="og:title"]')
+    .getAttribute('content');
+  const brandKor = document
+    .querySelector('meta[property="product:brand"]')
+    .getAttribute('content');
+  const imageUrl = document
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
+  const salePrice = document
+    .querySelector('meta[property="product:price:amount"]')
+    .getAttribute('content');
+  const originalPrice = document
+    .querySelector('meta[property="product:price:normal_price"]')
+    .getAttribute('content');
+
+  return {
+    name,
+    brandKor,
+    imageUrl,
+    salePrice,
+    originalPrice,
+  };
+};
