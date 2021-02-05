@@ -5,6 +5,7 @@ import { InfoCrawlResult } from '../types';
 
 import * as infoCrawlers from '../crawlers/info';
 import { waitUntilData } from '../crawlers/waitUntil';
+import { waitSelectorData } from '../crawlers/waitSelector';
 
 @Service()
 export default class InfoCrawlService {
@@ -24,29 +25,12 @@ export default class InfoCrawlService {
 
       const result = await this.pool.process(
         async (page, data) => {
-          let url_redirected = false;
-          page.on('response', (response) => {
-            const status = response.status();
-            //[301, 302, 303, 307, 308]
-            if (status >= 300 && status <= 399) {
-              url_redirected = true;
-            }
-          });
-
           const { url, crawler, waitUntil } = data;
           await page.goto(url, {
             waitUntil,
           });
+          await page.waitForSelector(waitSelectorData[host] || 'html');
 
-          if (url_redirected) {
-            //if page redireced , we wait for navigation end
-            await page.waitForNavigation({
-              waitUntil: 'domcontentloaded',
-            });
-          }
-
-          //finally , we remove listeners in case the response event fire more than once
-          page.removeAllListeners('response');
           const result = await page.evaluate(crawler);
           return result;
         },

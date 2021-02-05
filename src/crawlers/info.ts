@@ -538,8 +538,9 @@ export const _onthespotcokr = () => {
 
 export const _musinsaapppagelink = () => {
   const name = document
-    .querySelector('meta[property="og:title"]')
-    .getAttribute('content');
+    .querySelector('h2.prd-title')
+    ?.textContent.replace(/\n/gi, '')
+    .trim();
   const brandKor = document
     .querySelector('meta[property="product:brand"]')
     .getAttribute('content');

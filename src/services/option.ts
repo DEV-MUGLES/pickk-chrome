@@ -5,6 +5,7 @@ import { OptionCrawlResult } from '../types';
 
 import * as optionCrawlers from '../crawlers/option';
 import { waitUntilData } from '../crawlers/waitUntil';
+import { waitSelectorData } from '../crawlers/waitSelector';
 
 @Service()
 export default class OptionCrawlService {
@@ -29,6 +30,7 @@ export default class OptionCrawlService {
             waitUntil,
             timeout: 0,
           });
+          await page.waitForSelector(waitSelectorData[host] || 'html');
 
           const result = await page.evaluate(crawler);
           return result;
