@@ -104,8 +104,9 @@ export const _ssfshopcom = () => {
         .split('>')[0]
         .trim()
     ];
-  const imageUrl = (document.getElementsByClassName('lslide')[0].children[0]
-    .children[0] as HTMLImageElement).src;
+  const imageUrl = document
+    .querySelector('meta[property="og:image"]')
+    .getAttribute('content');
   const priceList = (document.getElementsByClassName(
     'price'
   )[0] as HTMLDivElement).innerText.split(/ | |\n/);
