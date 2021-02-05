@@ -25,11 +25,11 @@ export default class OptionCrawlService {
       const result = await this.pool.process(
         async (page, data) => {
           const { url, crawler, waitUntil } = data;
-
           await page.goto(url, {
             waitUntil,
             timeout: 0,
           });
+
           const result = await page.evaluate(crawler);
           return result;
         },
