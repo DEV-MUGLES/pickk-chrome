@@ -5,6 +5,7 @@ import { InfoCrawlResult } from '../types';
 
 import * as infoCrawlers from '../crawlers/info';
 import { waitUntilData } from '../crawlers/waitUntil';
+import { waitSelectorData } from '../crawlers/waitSelector';
 
 @Service()
 export default class InfoCrawlService {
@@ -28,6 +29,8 @@ export default class InfoCrawlService {
           await page.goto(url, {
             waitUntil,
           });
+          await page.waitForSelector(waitSelectorData[host] || 'html');
+
           const result = await page.evaluate(crawler);
           return result;
         },
