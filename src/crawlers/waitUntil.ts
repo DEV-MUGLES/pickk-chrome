@@ -7,5 +7,5 @@ export const waitUntilData = {
   'ssense.com': 'load',
   'thesortie.com': 'networkidle0',
   'onthespot.co.kr': 'networkidle2',
-  'musinsaapp.page.link': 'networkidle2',
+  'musinsaapp.page.link': 'networkidle0',
 };
