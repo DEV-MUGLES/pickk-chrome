@@ -144,12 +144,15 @@ export const _matchesfashioncom = () => {
   const imageUrl = document
     .querySelector('meta[property="og:image"]')
     .getAttribute('content');
-  const originalPrice = document
-    .querySelector('.pdp-price strike')
-    .textContent.replace(/[^\d]+/g, '');
+  const originalPrice = (
+    document.querySelector('.pdp-price strike') ||
+    document.querySelector('.pdp-price')
+  ).textContent
+    .split('/')[0]
+    .replace(/[^\d]+/g, '');
   const salePrice = document
     .querySelector('.pdp-price__hilite')
-    .textContent.split('$')[1];
+    ?.textContent.replace(/[^\d]+/g, '');
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
 
