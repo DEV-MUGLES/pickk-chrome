@@ -1,11 +1,11 @@
 import { Service, Inject } from 'typedi';
 
-import { parseHostName, correct, parseAll } from '../lib';
-import { InfoCrawlResult } from '../types';
+import { parseHostName, correct, parseAll } from '../../lib';
+import { InfoCrawlResult } from '../../types';
 
-import * as infoCrawlers from '../crawlers/info';
-import { waitUntilData } from '../crawlers/waitUntil';
-import { waitSelectorData } from '../crawlers/waitSelector';
+import * as infoCrawlers from '../../crawlers/info';
+import { waitUntilData } from '../../crawlers/waitUntil';
+import { waitSelectorData } from '../../crawlers/waitSelector';
 
 @Service()
 export default class InfoCrawlService {
