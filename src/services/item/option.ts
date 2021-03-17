@@ -1,11 +1,11 @@
 import { Service, Inject } from 'typedi';
 
-import { parseHostName } from '../lib';
-import { OptionCrawlResult } from '../types';
+import { parseHostName } from '../../lib';
+import { OptionCrawlResult } from '../../types';
 
-import * as optionCrawlers from '../crawlers/option';
-import { waitUntilData } from '../crawlers/waitUntil';
-import { waitSelectorData } from '../crawlers/waitSelector';
+import * as optionCrawlers from '../../crawlers/option';
+import { waitUntilData } from '../../crawlers/waitUntil';
+import { waitSelectorData } from '../../crawlers/waitSelector';
 
 @Service()
 export default class OptionCrawlService {
