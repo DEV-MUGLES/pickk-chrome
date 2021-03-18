@@ -566,3 +566,28 @@ export const _musinsaapppagelink = () => {
     originalPrice,
   };
 };
+
+export const _shopdescentekoreacokr = () => {
+  const name = document
+    .querySelector('meta[property="recopick:title"]')
+    .getAttribute('content');
+  const brandKor = document.querySelector('div.goods-info_title--brand')
+    .textContent;
+  const imageUrl = document
+    .querySelector('meta[property="recopick:image"]')
+    .getAttribute('content');
+  const originalPrice = document
+    .querySelector('meta[property="recopick:price"]')
+    .getAttribute('content');
+  const salePrice = document
+    .querySelector('meta[property="recopick:sale_price"]')
+    .getAttribute('content');
+
+  return {
+    name,
+    brandKor,
+    imageUrl,
+    salePrice,
+    originalPrice,
+  };
+};
