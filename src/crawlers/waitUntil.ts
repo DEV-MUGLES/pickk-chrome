@@ -8,4 +8,5 @@ export const waitUntilData = {
   'thesortie.com': 'networkidle0',
   'onthespot.co.kr': 'networkidle2',
   'musinsaapp.page.link': 'networkidle0',
+  'onthelook.co.kr': 'load',
 };
