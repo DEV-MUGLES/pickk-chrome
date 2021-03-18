@@ -191,18 +191,17 @@ export const _nikecom = () => {
 
 export const _onthelookcokr = () => {
   const name = (document.getElementsByClassName(
-    'sc-jdfcpN'
+    'sc-dpiBDp'
   )[0] as HTMLDivElement).innerText;
-
   const brandKor = (document.getElementsByClassName(
-    'sc-bIqbHp'
+    'sc-kbdWBx'
   )[0] as HTMLDivElement).innerText;
   const imageUrl = (document.getElementsByClassName(
-    'sc-fkyLDJ'
+    'sc-ctwKVn'
   )[0] as HTMLImageElement).src;
-  const originalPrice = (document.getElementsByClassName('sc-hMrMfs')[0]
+  const originalPrice = (document.getElementsByClassName('sc-cLmFfZ')[0]
     .children[0] as HTMLDivElement).innerText;
-  const salePrice = (document.getElementsByClassName('sc-eopZyb')[0]
+  const salePrice = (document.getElementsByClassName('sc-cXHFlN')[0]
     .children[0] as HTMLDivElement).innerText;
   return { name, brandKor, imageUrl, salePrice, originalPrice };
 };
