@@ -2,6 +2,7 @@ import { Router, Request, Response, NextFunction } from 'express';
 import { Container } from 'typedi';
 import { Logger } from 'winston';
 import DeliveryTrackService from '../../services/delivery/track';
+import qs from 'querystring';
 
 import { InfoCrawlService, OptionCrawlService } from '../../services/item';
 
@@ -50,11 +51,15 @@ export default (app: Router) => {
       const logger: Logger = Container.get('logger');
       logger.debug('Calling Option-Crawl endpoint with url: %s', req.url);
       try {
-        const { url } = req.query;
+        const { url, ...params } = req.query;
         const DeliveryTrackServiceInstance = Container.get(
           DeliveryTrackService
         );
-        const result = await DeliveryTrackServiceInstance.Crawl(url.toString());
+
+        const urlWithQuery = `${url}?${qs.stringify(
+          params as Record<string, string>
+        )}`;
+        const result = await DeliveryTrackServiceInstance.Crawl(urlWithQuery);
         return res.json(result).status(200);
       } catch (e) {
         logger.error('🔥 error: %o', e);
