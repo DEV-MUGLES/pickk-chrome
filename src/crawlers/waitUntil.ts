@@ -9,4 +9,5 @@ export const waitUntilData = {
   'onthespot.co.kr': 'networkidle2',
   'musinsaapp.page.link': 'networkidle0',
   'onthelook.co.kr': 'load',
+  'trenbe.com': 'load',
 };

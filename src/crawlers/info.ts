@@ -590,3 +590,30 @@ export const _shopdescentekoreacokr = () => {
     originalPrice,
   };
 };
+
+export const _trenbecom = () => {
+  const name = document
+    .querySelector('meta[property="og:title"]')
+    .getAttribute('content')
+    .split('|')[0];
+  const brandKor = document
+    .querySelector('meta[property="product:brand"]')
+    .getAttribute('content');
+  const imageUrl = document
+    .querySelector('meta[name="image"]')
+    .getAttribute('content');
+  const originalPrice = document
+    .querySelector('meta[property="product:price:amount"]')
+    .getAttribute('content');
+  const salePrice = document
+    .querySelector('meta[property="product:sale_price:amount"]')
+    .getAttribute('content');
+
+  return {
+    name,
+    brandKor,
+    imageUrl,
+    salePrice,
+    originalPrice,
+  };
+};
